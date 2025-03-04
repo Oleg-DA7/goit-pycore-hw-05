@@ -1,8 +1,9 @@
 from typing import Callable
 import re
+
 # Завдання 1
 # Ряд Фібоначчі
-
+#
 def caching_fibonacci():
     cache = {}
     def fibonacci(n):
