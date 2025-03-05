@@ -8,11 +8,6 @@ class LogEngine:
         self.file = file
         self._df_log = pd.DataFrame(columns=['date', 'time', 'type', 'message'])
         self._load_logs(file)
-        if self._loaded:
-            self.count_logs_by_level()
-            self.display_log_counts()
-        else:
-            sys.exit
 
     def count_logs_by_level(self) -> dict: 
         self._df_stat = self._df_log.groupby('type')['message'].count()
@@ -58,6 +53,8 @@ def main():
         print("Invalid count of parameters!")
         sys.exit(1)
     le = LogEngine(sys.argv[1])
+    le.count_logs_by_level()
+    le.display_log_counts()
     if len(sys.argv) == 3:
         le.filter_logs_by_level(sys.argv[2])
 
