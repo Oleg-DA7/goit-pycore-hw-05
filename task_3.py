@@ -7,7 +7,7 @@ class LogEngine:
     def __init__(self, file):
         self.file = file
         self._df_log = pd.DataFrame(columns=['date', 'time', 'type', 'message'])
-        self._loaded = self._load_logs(file)
+        self._load_logs(file)
         if self._loaded:
             self.count_logs_by_level()
             self.display_log_counts()
@@ -23,18 +23,21 @@ class LogEngine:
         return result
 
     def _load_logs(self, file_path: str) -> list:
+        result = []
         try:
             with open(file_path) as file:    
-                for line in file: 
+                for line in file:                     
                     l_list = self._parse_log_line(line)                
+                    result.append(l_list)
                     self._df_log.loc[len(self._df_log)] = l_list
         except FileNotFoundError:
             print(f'Can`t find file {file_path}')
-            return False
+            sys.exit
         except IOError:
             print(f'An error occurred while reading the file {file_path}')
-            return False
-        return True
+            sys.exit
+        self._loaded = True
+        return result
 
     def filter_logs_by_level(self, level: str) -> list:
         result = []
