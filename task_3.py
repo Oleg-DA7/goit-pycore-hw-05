@@ -48,6 +48,7 @@ class LogEngine:
         for i, v in self._df_stat.items():
             print(f'{'{: <17}'.format(i)}|  {v}')
     
+
 def main():
     if len(sys.argv) < 2 | len(sys.argv) > 3:
         print("Invalid count of parameters!")
@@ -57,6 +58,7 @@ def main():
     le.display_log_counts()
     if len(sys.argv) == 3:
         le.filter_logs_by_level(sys.argv[2])
+
 
 if __name__ == "__main__":
     main()
